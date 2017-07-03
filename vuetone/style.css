@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+div.wrapper {
+  height: 100%;
+}
+
+p {
+  margin: 0px;
+  font-size: 24px;
+  font-family: 'Play', sans-serif;
+}
+
+ul {
+  clear: both;
+  height: 90%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.text-center-wrapper {
+  position: relative;
+}
+
+p.text-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+li.tone-list-item {
+  width: 20%;
+  height: 33.33333%;
+  float: left;
+  display: inline;
+}
+
+li.tone-list-item:hover {
+  filter: brightness(80%);
+}
+
+li#item-1 { background-color: hsla(0, 80%, 80%, 1.0)}
+li#item-2 { background-color: hsla(20, 80%, 80%, 1.0)}
+li#item-3 { background-color: hsla(40, 80%, 80%, 1.0)}
+li#item-4 { background-color: hsla(60, 80%, 80%, 1.0)}
+li#item-5 { background-color: hsla(80, 80%, 80%, 1.0)}
+li#item-6 { background-color: hsla(100, 80%, 80%, 1.0)}
+li#item-7 { background-color: hsla(120, 80%, 80%, 1.0)}
+li#item-8 { background-color: hsla(140, 80%, 80%, 1.0)}
+li#item-9 { background-color: hsla(160, 80%, 80%, 1.0)}
+li#item-10 { background-color: hsla(180, 80%, 80%, 1.0)}
+li#item-11 { background-color: hsla(200, 80%, 80%, 1.0)}
+li#item-12 { background-color: hsla(220, 80%, 80%, 1.0)}
+li#item-13 { background-color: hsla(240, 80%, 80%, 1.0)}
+li#item-14 { background-color: hsla(260, 80%, 80%, 1.0)}
+li#item-15 { background-color: hsla(280, 80%, 80%, 1.0)}
+
+div.mode-selector {
+  height: 10%;
+  background-color: lightgrey;
+  position: relative;
+}
+
+div.mode-selector-inner {
+  position: absolute;
+  top: 10%;
+  height: 80%;
+  width: 60%;
+  margin: auto;
+  position: relative;
+}
+
+div.mode-button {
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  float: left;
+  background-color: hsla(0, 0%, 60%, 1.0);
+}
+
+div.mode-button.play {
+  border-radius: 0 35px 35px 0;
+}
+
+div.mode-button.record  {
+  border-radius: 35px 0 0 35px;
+}
+
+div.mode-button.selected {
+  box-shadow: inset 0px 0px 5px black;
+}
+
+div.mode-button.play.selected {
+  background-color: hsla(140, 100%, 40%, 1.0);
+}
+
+div.mode-button.record.selected {
+  background-color: hsla(0, 100%, 60%, 1.0);
+}
