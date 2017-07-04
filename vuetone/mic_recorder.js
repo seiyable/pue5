@@ -1,3 +1,5 @@
+// p5 global instance
+
 var mic, recorder;
 function setup(){
   mic = new p5.AudioIn();

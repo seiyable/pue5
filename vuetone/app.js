@@ -5,7 +5,10 @@ Vue.component('tone-list-item', {
   data: function () {
     return {
       p5Instance: null,
-      recorded: false
+      recording: false,
+      recorded: false,
+      onMouse: false,
+      triedToPlayButNoSound: false
     }
   },
   props: {
@@ -18,35 +21,76 @@ Vue.component('tone-list-item', {
     <li
       class="tone-list-item text-center-wrapper"
       :id="getId"
-      @click="playback"
-      @mousedown="recordOn"
-      @mouseup="recordOff">
-      <p class="text-center">{{ toneName }}</p>
+      @mousedown="mouseDown"
+      @mouseup="mouseUp"
+      @mouseover="mouseOver"
+      @mouseleave="mouseLeave">
+      <p class="text-center">{{ getMessage }}</p>
     </li>`,
   methods: {
     playback: function () {
-      if (this.mode === 'play') {
+      if (this.recorded) {
         console.log('playback sound of ' + this.toneName)
         this.p5Instance.playThisSound();
+      } else {
+        this.triedToPlayButNoSound = true;
       }
     },
-    recordOn: function () {
+    startRecording: function () {
+      console.log('start recording for ' + this.toneName)
+      this.p5Instance.startRecording();
+      this.recording = true;
+    },
+    stopRecording: function () {
+      console.log('stop recording for ' + this.toneName)
+      this.p5Instance.stopRecording();
+      this.recording = false;
+      this.recorded  = true;
+    },
+    mouseDown: function () {
       if (this.mode === 'record') {
-        console.log('start recording for ' + this.toneName)
-        this.p5Instance.startRecording();
+        this.startRecording();
+      } else if (this.mode === 'play') {
+        this.playback();
       }
     },
-    recordOff: function () {
-      if (this.mode === 'record' && !this.recorded) {
-        console.log('stop recording for ' + this.toneName)
-        this.p5Instance.stopRecording();
-        this.recorded = true;
+    mouseUp: function () {
+      if (this.mode === 'record' && this.recording) {
+        this.stopRecording();
+      }
+    },
+    mouseOver: function () {
+      this.onMouse = true;
+    },
+    mouseLeave: function () {
+      this.onMouse = false;
+
+      if (this.mode === 'record' && this.recording) {
+        this.stopRecording();
+      }
+
+      if (this.mode === 'play') {
+        this.triedToPlayButNoSound = false;
       }
     }
   },
   computed: {
     getId: function () {
       return 'item-' + this.toneId;
+    },
+    getMessage: function () {
+      if (this.onMouse) {
+        if (this.mode === 'record') {
+          return 'Click and Hold to Record';
+        } else if (this.mode === 'play') {
+          if (this.recorded) {
+            return 'Click to Play Sound';
+          } else if (this.triedToPlayButNoSound) {
+            return 'Sound is Not Recorded';
+          }
+        }
+      }
+      return '';
     }
   },
   mounted: function () {
@@ -201,7 +245,6 @@ new Vue({
   el: '#app',
   data: function () {
     return {
-      // p5Instance: null,
       mode: 'record'
     }
   },
@@ -216,14 +259,4 @@ new Vue({
       this.mode = mode;
     }
   }
-  // mounted: {
-  //   var sketch = function( p ) {
-  //     // ============ setup() ============
-  //     p.setup = function() {
-  //     }
-  //
-  //     // append canvas tag under this component
-  //     this.p5Instance = new p5(sketch, 'app');
-  //   }
-  // }
 })
