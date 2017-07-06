@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+p {
+  margin: 0px;
+  font-size: 24px;
+  /*font-family: 'Play', sans-serif;*/
+}
+
+li.canvas-wrapper {
+  float: left;
+  display: inline;
+  position: absolute;
+  background-color: red;
+}
