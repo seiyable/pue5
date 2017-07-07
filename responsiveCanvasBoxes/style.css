@@ -22,5 +22,8 @@ li.canvas-wrapper {
   float: left;
   display: inline;
   position: absolute;
-  background-color: red;
+}
+
+li.canvas-wrapper p {
+  position: absolute;
 }
